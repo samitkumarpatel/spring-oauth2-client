@@ -42,7 +42,7 @@ class WebController {
 
 		var token = registration.getClientSecret();
 		log.info("Client secret: {}", token);
-		return "redirect:/index.html";
+		return "redirect:index.html";
 
 	}
 
