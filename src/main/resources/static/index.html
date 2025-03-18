@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>spring-oauth2-client</title>
+    <style>
+        body {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
 </head>
     <body>
         <h1>Spring Oauth2 Client</h1>
+        <p id="cookie">available cookie</p>
+        <script>
+            //read cookie and display it
+            let cookie = document.cookie;
+            //display cookie in id cookie
+            document.getElementById("cookie").innerHTML = cookie;
+        </script>
     </body>
 </html>
