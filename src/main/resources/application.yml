@@ -5,9 +5,9 @@ spring:
     oauth2:
       client:
         registration:
-          clientone:
+          mvcclient:
             provider: "spring"
-            client-id: "clientone"
+            client-id: "mvcclient"
             client-secret: "secret"
             authorization-grant-type: "authorization_code"
             client-authentication-method: "client_secret_basic"

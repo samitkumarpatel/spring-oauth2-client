@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +45,7 @@ class WebController {
 	@GetMapping(value = "/")
 	public String index(HttpServletResponse response, Authentication authentication) {
 
-		var token = authorizedClientService.loadAuthorizedClient("clientone", authentication.getName())
+		var token = authorizedClientService.loadAuthorizedClient("mvcclient", authentication.getName())
 				.getAccessToken().getTokenValue();
 		log.info("Client secret: {}", token);
 		Cookie cookie = new Cookie("access_token", token);
@@ -54,7 +55,7 @@ class WebController {
 
 	@GetMapping("/access_token")
 	@ResponseBody
-	public Map<String,String> token(@RegisteredOAuth2AuthorizedClient("clientone") OAuth2AuthorizedClient authorizedClient) {
+	public Map<String,String> token(@RegisteredOAuth2AuthorizedClient("mvcclient") OAuth2AuthorizedClient authorizedClient) {
 
 		return Map.of(
 				"access_token", authorizedClient.getAccessToken().getTokenValue(),
@@ -65,7 +66,7 @@ class WebController {
 
 	@GetMapping("/me")
 	@ResponseBody
-	public Map<String, Object> user(Authentication authentication) {
-		return Map.of();
+	public Authentication user(Authentication authentication) {
+		return authentication;
 	}
 }
