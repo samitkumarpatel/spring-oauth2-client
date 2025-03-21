@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -67,6 +69,19 @@ class WebController {
 	@GetMapping("/me")
 	@ResponseBody
 	public Authentication user(Authentication authentication) {
+		/*Optional.ofNullable(authentication)
+				.map(JwtAuthenticationToken.class::cast)
+				.map(JwtAuthenticationToken::getToken)
+				.map(Jwt::getClaims)
+				.map(claims -> User.builder()
+						.userName(getValueAsString(claims.get("username")))
+						.customerCode(getValueAsString(claims.get("")))
+						.roles(getValueAsList(claims.get("roles")))
+						.scope(getValueAsList(claims.get("scope")))
+						.personId(getValueAsString(claims.get("")))
+						.build())
+				.orElseThrow();*/
 		return authentication;
 	}
+
 }
